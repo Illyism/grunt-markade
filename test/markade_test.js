@@ -28,10 +28,15 @@ exports.markade = {
     done();
   },
   default_options: function(test) {
-    test.expect(1);
+    test.expect(2);
 
     var actual = grunt.file.read('tmp/123.html');
     var expected = grunt.file.read('test/expected/123.html');
+
+    test.equal(actual, expected, 'Can write a directory');
+
+    actual = grunt.file.read('tmp/testing.html');
+    expected = grunt.file.read('test/expected/testing.html');
 
     test.equal(actual, expected, 'Can write a directory');
 
@@ -43,6 +48,15 @@ exports.markade = {
     var actual = grunt.file.read('tmp/custom_options.html');
     var expected = grunt.file.read('test/expected/custom_options.html');
     test.equal(actual, expected, 'Can write a file without a template');
+
+    test.done();
+  },
+  pretty_include: function(test) {
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/with_layout.html');
+    var expected = grunt.file.read('test/expected/with_layout.html');
+    test.equal(actual, expected, 'Can use extends, include and add options to jade');
 
     test.done();
   },

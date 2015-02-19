@@ -45,6 +45,17 @@ module.exports = function(grunt) {
         files: {
           'tmp/custom_options.html': "test/fixtures/testing.md"
         }
+      },
+      with_layout: {
+        options: {
+          "template": "test/templates/index.jade",
+          "jade": {
+            "pretty": true
+          }
+        },
+        files: {
+          "tmp/with_layout.html": "test/fixtures/testing.md"
+        }
       }
     },
 

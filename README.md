@@ -25,7 +25,7 @@ In your project's Gruntfile, add a section named `markade` to the data object pa
 ```js
 grunt.initConfig({
   markade: {
-    your_target: {
+    tem: {
       options: {
         "template": "template.jade"
       },
@@ -45,6 +45,13 @@ Default value: `empty.jade`
 
 A file path to the Jade template. If none is specified it simply parses out all Markdown content.
 
+#### options.jade
+Type: `Object`
+Default value: `{}`
+
+An object with options to pass to `Jade.compile`. Values like `pretty: true`.
+
+
 
 ### Usage Examples
 
@@ -55,10 +62,12 @@ So if `file.md` has content `**bold** text` then `default.html` would be `<b>bol
 ```js
 grunt.initConfig({
   markade: {
-    options: {},
-    files: {
-      'dest/default.html': ["src/file.md"],
-    },
+    no_template: {
+      options: {},
+      files: {
+        'dest/default.html': ["src/file.md"],
+      },
+    }
   },
 });
 ```
@@ -70,12 +79,14 @@ Add a `template` option to parse the data through the Jade template.
 ```js
 grunt.initConfig({
   markade: {
-    options: {
-      template: 'templates/layout.jade'
-    },
-    files: {
-      'index.html': 'index.md'
-    },
+    layout: {
+      options: {
+        template: 'templates/layout.jade'
+      },
+      files: {
+        'index.html': 'index.md'
+      },
+    }
   },
 });
 ```
@@ -95,7 +106,27 @@ grunt.initConfig({
     },
   },
 });
-```
+
+#### Jade Options
+
+You can pass objects to Jade.
+
+```js
+grunt.initConfig({
+  markade: {
+    with_layout: {
+      options: {
+        "template": "templates/index.jade",
+        "jade": {
+          "pretty": true
+        }
+      },
+      files: {
+        "public/index.html": "data/index.md"
+      }
+    }
+  },
+});
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).

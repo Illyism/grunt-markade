@@ -20,6 +20,7 @@ module.exports = function(grunt) {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       log: 'log',
+      jade: {}
     });
 
     var template = "| !{html}";
@@ -63,13 +64,14 @@ module.exports = function(grunt) {
         file.data = grunt.file.read(file.src);
         return file;
       }).forEach(function(f) {
-        markade(f.data, template, function(err, html) {
+        options.jade.filename = options.template || null;
+        markade(f.data, template, {jade: options.jade}, function(err, html) {
           if (err) {
             console.error("Markade err", err);
+          } else {
+            grunt.file.write(f.dest, html);
+            grunt.log.writeln('File "' + f.dest + '" created.');
           }
-
-          grunt.file.write(f.dest, html);
-          grunt.log.writeln('File "' + f.dest + '" created.');
         });
       });      
     });
