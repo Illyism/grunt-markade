@@ -65,7 +65,7 @@ module.exports = function(grunt) {
         return file;
       }).forEach(function(f) {
         options.jade.filename = options.template || null;
-        markade(f.data, template, {jade: options.jade}, function(err, html) {
+        markade(f.data, template, options, function(err, html) {
           if (err) {
             console.error("Markade err", err);
           } else {
