@@ -40,6 +40,6 @@
     "gruntplugin"
   ],
   "dependencies": {
-    "markade": "^0.1.2"
+    "markade": "^0.3.0"
   }
 }
